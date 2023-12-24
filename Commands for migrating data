@@ -1,0 +1,24 @@
+Connect to the CafeInstance by using EC2 Instance Connect. Follow the instructions that you used earlier to connect to the CLI Host instance.
+
+You use the mysqldump utility to create a backup of the local cafe_db database. This utility program is part of the MySQL database product, and it is available for you to use. 
+
+In the terminal window, run the following command: 
+
+mysqldump --user=root --password='Re:Start!9' \
+--databases cafe_db --add-drop-database > cafedb-backup.sql
+This command generates SQL statements in a file named cafedb-backup.sql, which can be run to reproduce the schema and data of the original cafe_db database.
+
+To review the contents of the backup file, open the cafedb-backup.sql file in your preferred text editor. Alternatively, if you want to view it using the Linux less command, enter the following command in the terminal window:
+
+less cafedb-backup.sql
+In the terminal window, enter the following command. In the command, replace <RDS Instance Database Endpoint Address> with the value that you recorded earlier.
+
+mysql --user=root --password='Re:Start!9' \
+--host=<RDS Instance Database Endpoint Address> \
+< cafedb-backup.sql
+
+In the SSH window, enter the following command. In the command, replace <RDS Instance Database Endpoint Address> with the value that you recorded earlier.
+
+mysql --user=root --password='Re:Start!9' \
+--host=<RDS Instance Database Endpoint Address> \
+cafe_db
